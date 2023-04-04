@@ -10,8 +10,12 @@ module Types
     # TODO: remove me
     field :users, [UserType], null: false, description: 'List all users'
     def users
-      User.all
+      User.preload(:posts, :comments)
     end
    
+    field :posts, [PostType], null: false, description: 'List all posts'
+    def posts
+      Post.preload(:comments)
+    end
   end
 end
